@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AmbikaShelf | Coming Soon</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,14 +20,19 @@
             background-color: #050505;
             color: #ffffff;
             overflow-x: hidden;
-            cursor: none; /* Hide default cursor for custom one */
+            /* Allow default cursor on mobile, hide on desktop */
+            cursor: auto; 
+        }
+
+        @media (min-width: 768px) {
+            body { cursor: none; }
         }
 
         h1, h2, h3, .font-syne {
             font-family: 'Syne', sans-serif;
         }
 
-        /* Custom Cursor */
+        /* Custom Cursor - Hidden on Touch Devices */
         .cursor {
             position: fixed;
             top: 0;
@@ -41,6 +46,11 @@
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .cursor { display: block; }
         }
 
         .cursor.hovered {
@@ -62,15 +72,19 @@
         /* Floating Blobs Background */
         .blob {
             position: absolute;
-            filter: blur(100px);
+            filter: blur(80px);
             z-index: -1;
-            opacity: 0.6;
+            opacity: 0.5;
             animation: float 10s ease-in-out infinite alternate;
+        }
+        
+        @media (min-width: 768px) {
+            .blob { filter: blur(100px); opacity: 0.6; }
         }
 
         @keyframes float {
             0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(-50px) scale(1.1); }
+            100% { transform: translateY(-30px) scale(1.1); }
         }
 
         .loader {
@@ -88,155 +102,160 @@
         
         .timer-box {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-purple-500 selection:text-white">
 
-    <div class="cursor hidden md:block"></div>
+    <div class="cursor"></div>
 
     <div class="loader">
-        <h1 class="text-4xl md:text-6xl font-syne font-bold text-white tracking-wider">
+        <h1 class="text-3xl md:text-6xl font-syne font-bold text-white tracking-wider px-4 text-center">
             Ambika<span class="text-gradient">Shelf</span>
         </h1>
     </div>
 
-    <div class="blob bg-purple-600 w-96 h-96 rounded-full top-[-10%] left-[-10%]"></div>
-    <div class="blob bg-pink-600 w-[30rem] h-[30rem] rounded-full bottom-[-20%] right-[-10%] animation-delay-2000"></div>
+    <div class="blob bg-purple-600 w-64 h-64 md:w-96 md:h-96 rounded-full top-[-5%] left-[-10%]"></div>
+    <div class="blob bg-pink-600 w-80 h-80 md:w-[30rem] md:h-[30rem] rounded-full bottom-[-10%] right-[-10%] animation-delay-2000"></div>
 
-    <nav class="fixed w-full p-6 md:p-10 flex justify-between items-center z-50 mix-blend-difference">
-        <div class="text-2xl font-syne font-bold tracking-tighter hover-target">
+    <nav class="fixed w-full p-4 md:p-10 flex justify-between items-center z-50 mix-blend-difference">
+        <div class="text-xl md:text-2xl font-syne font-bold tracking-tighter hover-target">
             AmbikaShelf
         </div>
-        <a href="#contact" class="hover-target text-sm uppercase tracking-widest border-b border-white pb-1 hover:text-purple-400 transition-colors">
+        <a href="#contact" class="hover-target text-xs md:text-sm uppercase tracking-widest border-b border-white pb-1 hover:text-purple-400 transition-colors">
             Contact
         </a>
     </nav>
 
-    <section class="min-h-screen flex flex-col justify-center items-center relative px-4 pt-20">
+    <section class="min-h-[100svh] flex flex-col justify-center items-center relative px-4 pt-16">
         <div class="text-center z-10 w-full max-w-5xl">
-            <p class="text-sm md:text-lg uppercase tracking-[0.3em] mb-6 text-gray-400 hero-anim">Greetings from</p>
+            <p class="text-xs md:text-lg uppercase tracking-[0.3em] mb-4 md:mb-6 text-gray-400 hero-anim">Greetings from</p>
             
-            <h1 class="hide-text text-6xl md:text-8xl lg:text-9xl font-syne font-bold leading-none mb-6">
+            <h1 class="hide-text text-[12vw] sm:text-7xl md:text-8xl lg:text-9xl font-syne font-bold leading-none mb-4 md:mb-6">
                 <span>AmbikaShelf</span>
             </h1>
             
-            <h2 class="text-3xl md:text-5xl lg:text-7xl font-bold mb-8 hero-anim">
+            <h2 class="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 md:mb-8 hero-anim">
                 Coming <span class="text-gradient italic">Soon</span>
             </h2>
 
-            <p class="text-xl md:text-3xl text-gray-300 font-light mb-16 hero-anim">
+            <p class="text-lg sm:text-2xl md:text-3xl text-gray-300 font-light mb-10 md:mb-16 hero-anim px-2">
                 Something <span class="font-semibold text-white">New</span>. 
                 Something <span class="font-syne font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">BIG</span>.
             </p>
 
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8 hero-anim">
-                <div class="timer-box w-24 h-24 md:w-32 md:h-32 flex flex-col items-center justify-center rounded-2xl hover-target">
-                    <span id="hours" class="text-4xl md:text-5xl font-syne font-bold">48</span>
-                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-400 mt-2">Hours</span>
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-8 hero-anim">
+                <div class="timer-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 flex flex-col items-center justify-center rounded-2xl hover-target">
+                    <span id="hours" class="text-3xl sm:text-4xl md:text-5xl font-syne font-bold">48</span>
+                    <span class="text-[10px] sm:text-xs md:text-sm uppercase tracking-widest text-gray-400 mt-1 sm:mt-2">Hours</span>
                 </div>
-                <div class="timer-box w-24 h-24 md:w-32 md:h-32 flex flex-col items-center justify-center rounded-2xl hover-target">
-                    <span id="minutes" class="text-4xl md:text-5xl font-syne font-bold">00</span>
-                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-400 mt-2">Mins</span>
+                <div class="timer-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 flex flex-col items-center justify-center rounded-2xl hover-target">
+                    <span id="minutes" class="text-3xl sm:text-4xl md:text-5xl font-syne font-bold">00</span>
+                    <span class="text-[10px] sm:text-xs md:text-sm uppercase tracking-widest text-gray-400 mt-1 sm:mt-2">Mins</span>
                 </div>
-                <div class="timer-box w-24 h-24 md:w-32 md:h-32 flex flex-col items-center justify-center rounded-2xl hover-target">
-                    <span id="seconds" class="text-4xl md:text-5xl font-syne font-bold">00</span>
-                    <span class="text-xs md:text-sm uppercase tracking-widest text-gray-400 mt-2">Secs</span>
+                <div class="timer-box w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 flex flex-col items-center justify-center rounded-2xl hover-target">
+                    <span id="seconds" class="text-3xl sm:text-4xl md:text-5xl font-syne font-bold">00</span>
+                    <span class="text-[10px] sm:text-xs md:text-sm uppercase tracking-widest text-gray-400 mt-1 sm:mt-2">Secs</span>
                 </div>
             </div>
         </div>
         
-        <div class="absolute bottom-10 animate-bounce hero-anim">
-            <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">Scroll to Discover</p>
-            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent mx-auto"></div>
+        <div class="absolute bottom-6 md:bottom-10 animate-bounce hero-anim">
+            <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 mb-2">Scroll to Discover</p>
+            <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-white to-transparent mx-auto"></div>
         </div>
     </section>
 
-    <section class="min-h-screen py-20 px-6 md:px-12 lg:px-24 flex flex-col justify-center relative">
+    <section class="min-h-screen py-16 md:py-20 px-5 md:px-12 lg:px-24 flex flex-col justify-center relative z-10">
         <div class="max-w-7xl mx-auto w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
                 <div class="info-text">
-                    <h2 class="text-4xl md:text-6xl font-syne font-bold mb-6">
-                        One Smart Solution for Your <span class="text-gradient">Everyday Tools.</span>
+                    <h2 class="text-3xl sm:text-4xl md:text-6xl font-syne font-bold mb-6">
+                        One Smart Solution for Your <span class="text-gradient block mt-2 md:inline md:mt-0">Everyday Tools.</span>
                     </h2>
-                    <p class="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
+                    <p class="text-base md:text-xl text-gray-400 mb-8 leading-relaxed">
                         We are upgrading our ecosystem to serve you better. The all-new platform will integrate our flagship tools into an even more seamless experience at no cost.
                     </p>
-                    <div class="flex gap-4">
-                        <span class="px-4 py-2 rounded-full border border-gray-700 text-sm">QR Shelf</span>
-                        <span class="px-4 py-2 rounded-full border border-gray-700 text-sm">PDF Shelf</span>
-                        <span class="px-4 py-2 rounded-full border border-gray-700 text-sm">Shelf Chat</span>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full border border-gray-700 text-xs md:text-sm text-gray-300">QR Shelf</span>
+                        <span class="px-4 py-2 rounded-full border border-gray-700 text-xs md:text-sm text-gray-300">PDF Shelf</span>
+                        <span class="px-4 py-2 rounded-full border border-gray-700 text-xs md:text-sm text-gray-300">Shelf Chat</span>
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 info-cards">
-                    <div class="timer-box p-8 rounded-2xl hover:border-purple-500 transition-colors hover-target">
-                        <h3 class="text-2xl font-syne font-bold mb-4">Hustle Free</h3>
-                        <p class="text-gray-400">Instantly access the tools you need without the friction of mandatory signups.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 info-cards">
+                    <div class="timer-box p-6 md:p-8 rounded-2xl hover:border-purple-500 transition-colors hover-target">
+                        <h3 class="text-xl md:text-2xl font-syne font-bold mb-3 md:mb-4">Hustle Free</h3>
+                        <p class="text-sm md:text-base text-gray-400">Instantly access the tools you need without the friction of mandatory signups.</p>
                     </div>
-                    <div class="timer-box p-8 rounded-2xl hover:border-pink-500 transition-colors mt-0 sm:mt-12 hover-target">
-                        <h3 class="text-2xl font-syne font-bold mb-4">AI Powered</h3>
-                        <p class="text-gray-400">Enhanced by AmbikaShelf.AI to clear your confusions in real-time.</p>
+                    <div class="timer-box p-6 md:p-8 rounded-2xl hover:border-pink-500 transition-colors sm:mt-8 md:mt-12 hover-target">
+                        <h3 class="text-xl md:text-2xl font-syne font-bold mb-3 md:mb-4">AI Powered</h3>
+                        <p class="text-sm md:text-base text-gray-400">Enhanced by AmbikaShelf.AI to clear your confusions in real-time.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="py-20 px-6 md:px-12 lg:px-24 border-t border-white/10 relative overflow-hidden">
-        <div class="blob bg-blue-600 w-96 h-96 rounded-full bottom-[-50%] left-[20%]"></div>
+    <footer id="contact" class="pt-16 pb-10 md:py-20 px-5 md:px-12 lg:px-24 border-t border-white/10 relative overflow-hidden z-10 bg-[#020202]">
+        <div class="blob bg-blue-600 w-64 h-64 md:w-96 md:h-96 rounded-full bottom-[-20%] left-[10%] opacity-30 md:opacity-50"></div>
         
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 footer-reveal">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 footer-reveal">
             <div>
-                <h2 class="text-3xl font-syne font-bold mb-6">Let's Connect</h2>
-                <p class="text-gray-400 mb-8 max-w-sm">
+                <h2 class="text-3xl md:text-4xl font-syne font-bold mb-4 md:mb-6">Let's Connect</h2>
+                <p class="text-sm md:text-base text-gray-400 mb-6 md:mb-8 max-w-sm">
                     Have questions? We're setting up something massive, but our support lines remain open.
                 </p>
-                <a href="mailto:support@ambikashelf.in" class="text-xl md:text-2xl border-b-2 border-purple-500 pb-1 hover-target hover:text-purple-400 transition-colors">
+                <a href="mailto:support@ambikashelf.in" class="inline-block text-lg sm:text-xl md:text-2xl border-b border-purple-500 pb-1 hover-target hover:text-purple-400 transition-colors break-all">
                     support@ambikashelf.in
                 </a>
             </div>
             
-            <div class="flex flex-col md:items-end justify-center gap-4">
-                <h3 class="text-lg font-bold uppercase tracking-widest text-gray-500 mb-2">Follow Us</h3>
-                <div class="flex gap-6">
-                    <a href="#" class="hover-target text-white hover:text-pink-500 transition-colors">Instagram</a>
-                    <a href="#" class="hover-target text-white hover:text-blue-500 transition-colors">LinkedIn</a>
-                    <a href="#" class="hover-target text-white hover:text-gray-400 transition-colors">GitHub</a>
-                    <a href="#" class="hover-target text-white hover:text-blue-600 transition-colors">Facebook</a>
+            <div class="flex flex-col md:items-end justify-center gap-4 mt-6 md:mt-0">
+                <h3 class="text-sm md:text-lg font-bold uppercase tracking-widest text-gray-500 mb-1 md:mb-2">Follow Us</h3>
+                <div class="flex flex-wrap gap-4 md:gap-6">
+                    <a href="#" class="hover-target text-sm md:text-base text-white hover:text-pink-500 transition-colors">Instagram</a>
+                    <a href="#" class="hover-target text-sm md:text-base text-white hover:text-blue-500 transition-colors">LinkedIn</a>
+                    <a href="#" class="hover-target text-sm md:text-base text-white hover:text-gray-400 transition-colors">GitHub</a>
+                    <a href="#" class="hover-target text-sm md:text-base text-white hover:text-blue-600 transition-colors">Facebook</a>
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto mt-20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 footer-reveal">
+        <div class="max-w-7xl mx-auto mt-16 md:mt-20 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-gray-600 footer-reveal text-center md:text-left gap-4">
             <p>© 2026 AmbikaShelf. All Rights Reserved.</p>
-            <p class="mt-4 md:mt-0">✦ Made with ❤️ in India</p>
+            <p>✦ Made with ❤️ in India</p>
         </div>
     </footer>
 
     <script>
-        // Custom Cursor Logic
+        // Custom Cursor Logic (Only active on desktop)
         const cursor = document.querySelector('.cursor');
         const hoverTargets = document.querySelectorAll('.hover-target, a');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Check if device supports hover
+        if (window.matchMedia("(hover: hover)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
 
-        hoverTargets.forEach(target => {
-            target.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            target.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                target.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
 
         // Reverse 48 Hour Countdown Logic
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
         const secondsEl = document.getElementById('seconds');
 
-        // Set target date 48 hours from now
+        // Setting a fixed date in the future for demo purposes
+        // In a real scenario, you'd save this to localStorage or fetch from backend to persist across reloads
         let targetDate = new Date();
         targetDate.setHours(targetDate.getHours() + 48);
 
@@ -260,19 +279,22 @@
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
+        // Responsive animation logic
+        let mm = gsap.matchMedia();
+
         // Preloader & Hero Initial Load
         const tl = gsap.timeline();
 
         tl.to('.loader h1', {
             opacity: 0,
             scale: 1.1,
-            duration: 1,
+            duration: 0.8,
             delay: 0.5,
             ease: 'power3.inOut'
         })
         .to('.loader', {
             y: '-100%',
-            duration: 1,
+            duration: 0.8,
             ease: 'power4.inOut'
         })
         .to('.hide-text span', {
@@ -280,49 +302,48 @@
             duration: 1,
             ease: 'power4.out',
             stagger: 0.1
-        }, "-=0.5")
+        }, "-=0.4")
         .from('.hero-anim', {
-            y: 30,
+            y: 20,
             opacity: 0,
-            duration: 1,
+            duration: 0.8,
             ease: 'power3.out',
             stagger: 0.1
-        }, "-=0.5");
+        }, "-=0.6");
 
-        // Scroll Animations for Info Section
+        // Scroll Animations optimized for performance
         gsap.from('.info-text', {
             scrollTrigger: {
                 trigger: '.info-text',
-                start: 'top 80%',
+                start: 'top 85%',
             },
-            y: 50,
+            y: 30,
             opacity: 0,
-            duration: 1,
+            duration: 0.8,
             ease: 'power3.out'
         });
 
         gsap.from('.info-cards .timer-box', {
             scrollTrigger: {
                 trigger: '.info-cards',
-                start: 'top 80%',
-            },
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out'
-        });
-
-        // Footer Scroll Animation
-        gsap.from('.footer-reveal', {
-            scrollTrigger: {
-                trigger: 'footer',
-                start: 'top 90%',
+                start: 'top 85%',
             },
             y: 30,
             opacity: 0,
-            duration: 1,
-            stagger: 0.2,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.footer-reveal', {
+            scrollTrigger: {
+                trigger: 'footer',
+                start: 'top 95%',
+            },
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
             ease: 'power3.out'
         });
     </script>
